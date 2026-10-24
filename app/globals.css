@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ─────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+/* ── CSS Variables ────────────────────────────────────── */
+:root {
+  --font-inter: "Inter", system-ui, sans-serif;
+  --color-bg: #ffffff;
+  --color-surface: #f9fafb;
+  --color-surface-2: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+  --color-fraud-red: #dc2626;
+  --color-fraud-bg: #fef2f2;
+  --color-fraud-border: #fecaca;
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  font-family: var(--font-inter);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ── Card base ────────────────────────────────────────── */
+.mono-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.mono-surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/* ── Fraud — ONLY element retaining red accent ────────── */
+@keyframes fraudPulse {
+  0%, 100% { border-color: #dc2626; }
+  50% { border-color: #f87171; }
+}
+
+.fraud-border {
+  border: 2px solid #dc2626 !important;
+  animation: fraudPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ── Shimmer loading ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 0%,
+    #e5e7eb 50%,
+    #f3f4f6 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Prose overrides ──────────────────────────────────── */
+.prose-mono h1,
+.prose-mono h2,
+.prose-mono h3 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+.prose-mono p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+.prose-mono strong {
+  color: var(--color-text-primary);
+}
+.prose-mono code {
+  background: var(--color-surface-2);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: var(--color-text-primary);
+}
+
+/* ── Selection ────────────────────────────────────────── */
+::selection {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+/* ── Focus rings ──────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #111827;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Slide-in animation ───────────────────────────────── */
+@keyframes slideInRight {
+  0%   { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-slide-in-right { animation: slideInRight 0.3s ease-out; }
+.animate-fade-in        { animation: fadeIn 0.2s ease-out; }
+
+/* ── Risk score arc ───────────────────────────────────── */
+.risk-ring {
+  stroke-dasharray: 251.2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease;
+}
